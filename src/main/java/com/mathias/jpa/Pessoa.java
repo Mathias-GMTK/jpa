@@ -1,9 +1,6 @@
 package com.mathias.jpa;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Pessoa {
@@ -14,12 +11,17 @@ public class Pessoa {
     private String nome;
     private String sobrenome;
 
+
+    @OneToOne(mappedBy = "Pessoa", cascade = CascadeType.ALL)
+    private Carteira carteira;
+
     public Pessoa() {}
 
-    public Pessoa(Long id, String nome, String sobrenome) {
+    public  Pessoa(Long id, String nome, String sobrenome) {
         this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
+
     }
 
     public Long getId() { return id; }
