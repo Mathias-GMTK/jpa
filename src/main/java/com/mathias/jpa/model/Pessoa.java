@@ -1,4 +1,4 @@
-package com.mathias.jpa;
+package com.mathias.jpa.model;
 
 import jakarta.persistence.*;
 
@@ -12,7 +12,7 @@ public class Pessoa {
     private String sobrenome;
 
 
-    @OneToOne(mappedBy = "Pessoa", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "pessoa", cascade = CascadeType.ALL)
     private Carteira carteira;
 
     public Pessoa() {}
@@ -32,4 +32,11 @@ public class Pessoa {
 
     public String getSobrenome() { return sobrenome; }
     public void setSobrenome(String sobrenome) { this.sobrenome = sobrenome; }
+
+    public Carteira getCarteira() {
+        return carteira;}
+
+    public void setCarteira(Carteira carteira) {
+        this.carteira = carteira;
+    }
 }

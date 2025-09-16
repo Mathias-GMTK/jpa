@@ -1,9 +1,13 @@
-package com.mathias.jpa;
+package com.mathias.jpa.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-
 import java.time.LocalDate;
+import java.util.List;
+import jakarta.persistence.OneToOne;
+import jakarta.persistence.JoinColumn;
 
+@Entity
 public class Carteira {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,10 +18,11 @@ public class Carteira {
 
 
     @OneToOne
-    @JoinColumn(name = "pessoa_id")
-    private Pessoa Pessoa;
+    @JoinColumn(name = "pessoa_id", referencedColumnName = "id")
+    @JsonBackReference
+    private Pessoa pessoa;
 
-    @OneToMany(mappedBy = "Carteira", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "carteira", cascade = CascadeType.ALL)
     private List<Moto> motos;
 
     public Carteira(){}
@@ -27,7 +32,6 @@ public class Carteira {
         this.nome = nome;
         this.numeroRegistro = numeroRegistro;
         this.validade = validade;
-        this.pessoa = pessoa;
 
     }
 
@@ -64,11 +68,10 @@ public class Carteira {
     }
 
     public Pessoa getPessoa() {
-        return Pessoa;
+        return pessoa;
     }
 
-    public void setPessoa(Pessoa pessoa) {
-        Pessoa = pessoa;
+    public void setPessoa(Pessoa pessoa) {this.pessoa = pessoa;
     }
 
     public List<Moto> getMotos() {

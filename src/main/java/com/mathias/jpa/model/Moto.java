@@ -1,9 +1,6 @@
-package com.mathias.jpa;
+package com.mathias.jpa.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 
 @Entity
@@ -11,9 +8,15 @@ public class Moto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String marca;
     private String modelo;
     private Integer ano;
+
+
+    @ManyToOne
+    @JoinColumn(name = "carteira_id")
+    private Carteira carteira;
 
     public  Moto(){}
 
@@ -23,6 +26,8 @@ public class Moto {
         this.ano = ano;
 
     }
+    public Long getId() {return id;}
+    public void setId(Long id) {this.id = id;}
 
     public String getMarca() {
         return marca;
